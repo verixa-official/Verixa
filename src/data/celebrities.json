@@ -1,65 +1,190 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCelebrities } from '../hooks/useCelebrities';
-
-const CelebritiesPage = () => {
-  const navigate = useNavigate();
-  const { celebrities, loading } = useCelebrities();
-
-  const handleCelebrityClick = (slug) => {
-    navigate(`/celebrities/${slug}`);
-  };
-
-  return (
-    <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100">
-      <div className="max-w-[1400px] mx-auto px-8 py-16">
-        <div className="mb-16">
-          <h1 className="text-5xl font-serif mb-4">Celebrities</h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Discover the visionaries behind the brands we love
-          </p>
-        </div>
-
-        {loading ? (
-          <div className="grid grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-gray-200 dark:bg-gray-800 aspect-[3/4] mb-4" />
-                <div className="bg-gray-200 dark:bg-gray-800 h-6 w-2/3 mb-2" />
-                <div className="bg-gray-200 dark:bg-gray-800 h-4 w-1/2" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-3 gap-8">
-            {celebrities.map((celebrity) => (
-              <div
-                key={celebrity.id}
-                onClick={() => handleCelebrityClick(celebrity.slug)}
-                className="group cursor-pointer"
-              >
-                <div className="relative mb-4 overflow-hidden">
-                  <img
-                    src={celebrity.image}
-                    alt={celebrity.name}
-                    className="w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                </div>
-                
-                <h3 className="text-2xl font-serif mb-2 group-hover:text-gray-600 dark:group-hover:text-gray-400 transition-colors">
-                  {celebrity.name}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                  {celebrity.descriptor}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default CelebritiesPage;
+{
+  "celebrities": [
+    {
+      "id": "celebrity_001",
+      "name": "Emma Chen",
+      "slug": "emma-chen",
+      "descriptor": "Fashion & Lifestyle",
+      "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
+      "bio": "Former Vogue editor turned brand founder. Creating timeless pieces that blend modern minimalism with classic elegance.",
+      "brands": ["brand_001"],
+      "created_at": "2024-01-15"
+    },
+    {
+      "id": "celebrity_002",
+      "name": "Marcus Stone",
+      "slug": "marcus-stone",
+      "descriptor": "Home & Architecture",
+      "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+      "bio": "Award-winning architect and furniture designer. Building a collection of functional art for modern living spaces.",
+      "brands": ["brand_002"],
+      "created_at": "2024-01-14"
+    },
+    {
+      "id": "celebrity_003",
+      "name": "Sophia Laurent",
+      "slug": "sophia-laurent",
+      "descriptor": "Beauty & Wellness",
+      "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80",
+      "bio": "Clean beauty advocate and skincare scientist. Formulating products that honor both skin health and environmental responsibility.",
+      "brands": ["brand_003"],
+      "created_at": "2024-01-13"
+    },
+    {
+      "id": "celebrity_004",
+      "name": "James Park",
+      "slug": "james-park",
+      "descriptor": "Tech & Innovation",
+      "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80",
+      "bio": "Industrial designer reimagining everyday technology. Crafting devices that feel as good as they look.",
+      "brands": ["brand_004"],
+      "created_at": "2024-01-12"
+    },
+    {
+      "id": "celebrity_005",
+      "name": "Aria Nakamura",
+      "slug": "aria-nakamura",
+      "descriptor": "Fashion & Accessories",
+      "image": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
+      "bio": "Tokyo-based designer merging traditional Japanese craftsmanship with contemporary streetwear aesthetics.",
+      "brands": ["brand_005"],
+      "created_at": "2024-01-11"
+    },
+    {
+      "id": "celebrity_006",
+      "name": "Daniel Foster",
+      "slug": "daniel-foster",
+      "descriptor": "Home & Craft",
+      "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80",
+      "bio": "Master ceramicist and founder of a modern homeware studio. Every piece tells a story of slow, intentional creation.",
+      "brands": ["brand_006"],
+      "created_at": "2024-01-10"
+    }
+  ],
+  "brands": [
+    {
+      "id": "brand_001",
+      "name": "AUREA",
+      "slug": "aurea",
+      "celebrity_id": "celebrity_001",
+      "description": "Luxury silk scarves and accessories"
+    },
+    {
+      "id": "brand_002",
+      "name": "BAUHAUS MODERN",
+      "slug": "bauhaus-modern",
+      "celebrity_id": "celebrity_002",
+      "description": "Architectural furniture for contemporary spaces"
+    },
+    {
+      "id": "brand_003",
+      "name": "PURE SKIN CO",
+      "slug": "pure-skin-co",
+      "celebrity_id": "celebrity_003",
+      "description": "Clean, science-backed skincare"
+    },
+    {
+      "id": "brand_004",
+      "name": "NOMAD LUXE",
+      "slug": "nomad-luxe",
+      "celebrity_id": "celebrity_004",
+      "description": "Premium timepieces and tech accessories"
+    },
+    {
+      "id": "brand_005",
+      "name": "KAZE STUDIO",
+      "slug": "kaze-studio",
+      "celebrity_id": "celebrity_005",
+      "description": "Contemporary streetwear with heritage craft"
+    },
+    {
+      "id": "brand_006",
+      "name": "STUDIO KANSO",
+      "slug": "studio-kanso",
+      "celebrity_id": "celebrity_006",
+      "description": "Hand-thrown ceramics and tableware"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_001",
+      "name": "Minimalist Ceramic Vase",
+      "brand_id": "brand_006",
+      "celebrity_id": "celebrity_006",
+      "price": 120,
+      "image": "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?w=800&q=80",
+      "category": "home",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_002",
+      "name": "Architectural Lounge Chair",
+      "brand_id": "brand_002",
+      "celebrity_id": "celebrity_002",
+      "price": 2400,
+      "image": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80",
+      "category": "home",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_003",
+      "name": "Pure Silk Scarf",
+      "brand_id": "brand_001",
+      "celebrity_id": "celebrity_001",
+      "price": 350,
+      "image": "https://images.unsplash.com/photo-1583846112665-329ab1a7b7c5?w=800&q=80",
+      "category": "style",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_004",
+      "name": "Brushed Gold Timepiece",
+      "brand_id": "brand_004",
+      "celebrity_id": "celebrity_004",
+      "price": 1850,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
+      "category": "style",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_005",
+      "name": "Handcrafted Leather Wallet",
+      "brand_id": "brand_005",
+      "celebrity_id": "celebrity_005",
+      "price": 180,
+      "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&q=80",
+      "category": "style",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_006",
+      "name": "Organic Cotton Bedding Set",
+      "brand_id": "brand_006",
+      "celebrity_id": "celebrity_006",
+      "price": 420,
+      "image": "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800&q=80",
+      "category": "home",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_007",
+      "name": "Hydrating Face Serum",
+      "brand_id": "brand_003",
+      "celebrity_id": "celebrity_003",
+      "price": 85,
+      "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&q=80",
+      "category": "beauty",
+      "affiliate_url": "https://example.com/product"
+    },
+    {
+      "id": "prod_008",
+      "name": "Minimalist Side Table",
+      "brand_id": "brand_002",
+      "celebrity_id": "celebrity_002",
+      "price": 890,
+      "image": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+      "category": "home",
+      "affiliate_url": "https://example.com/product"
+    }
+  ]
+}
